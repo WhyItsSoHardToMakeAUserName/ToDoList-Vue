@@ -1,22 +1,19 @@
 <template>
-    <div style="display: flex;align-items: center; gap: 10px;">
+    <div style="display: flex;align-items: center; gap: 10px;padding: 5px 0;">
         <input type="checkbox"  @click="toggleTagOnCheckbox">
 
         <component :is="CurrentTag" ref="text"id="text" @click="setEditingState" @focusout="removeEditingState"><slot></slot></component>
         
-        <VButton>delete</VButton>
+        <VButton @click="$emit('deleteTask')">delete</VButton>
     </div>
 </template>
 <script>
 export default {
-    props:{
-
-    },
+    emits:['deleteTask'],
     data(){
         return{
             CurrentTag:'p',
             PreviousTag:'',
-            IsEditing:false
         }
     },
     methods:{
@@ -25,7 +22,6 @@ export default {
         },
         toggleTagOnCheckbox(){
             this.CurrentTag = this.CurrentTag === 'p' ? 'del' : 'p'
-            console.log(this.PreviousTag + '1')
         },
         setEditingState(){
             if(this.CurrentTag != 'input'){
