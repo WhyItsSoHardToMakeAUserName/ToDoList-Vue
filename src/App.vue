@@ -18,9 +18,4 @@ export default {
     align-items: center;
     padding-top: 5%;
   }
-  input{
-        border-radius: 20px;
-        border:  2px solid rgb(153, 153, 153);
-        padding-left: 10px;
-    }
 </style>

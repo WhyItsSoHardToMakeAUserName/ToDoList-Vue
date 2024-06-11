@@ -1,8 +1,8 @@
 <template>
-    <div style="display: flex;align-items: center; gap: 10px;padding: 5px 0;">
-        <input type="checkbox"  @click="toggleTagOnCheckbox">
+    <div>
+        <input type="checkbox" v-model="task.done"  @click="toggleTagOnCheckbox">
 
-        <component :is="CurrentTag" ref="text"id="text" :value="task.text" @input="task.text = $event.target.value" @click="setEditingState" @focusout="removeEditingState"><slot></slot></component>
+        <component :is="CurrentTag" ref="text"id="text" :value="task.text" @input="task.text = $event.target.value" @click="setEditingState" @keydown.enter="removeEditingState" @focusout="removeEditingState">{{ task.text }}</component>
         
         <VButton @click="$emit('deleteTask')">delete</VButton>
     </div>
@@ -15,14 +15,11 @@ export default {
     },
     data(){
         return{
-            CurrentTag:'p',
+            CurrentTag:this.task.done === false? 'p' :'del',
             PreviousTag:'',
         }
     },
     methods:{
-        test(){
-            console.log("helo")
-        },
         toggleTagOnCheckbox(){
             this.CurrentTag = this.CurrentTag === 'p' ? 'del' : 'p'
         },
@@ -44,5 +41,11 @@ export default {
 <style scoped>
     p{
         margin: 0;
+    }
+    div{
+        display: flex;
+        align-items: center; 
+        gap: 10px;
+        padding: 5px 0;
     }
 </style>

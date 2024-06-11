@@ -1,14 +1,17 @@
 <template>
     <div class="container">
-        <h1>To do list</h1>
-        <div style="display: flex; justify-content: space-between">
-            <input v-model="NewTask" type="text">
-            <VButton @click="addNewTask">Add</VButton>
 
+        <h1>To do list</h1>
+
+        <div class="NewTaskDiv">
+            <input style="width: 70%;" v-model="NewTask" @keydown.enter="addNewTask" type="text">
+            <VButton @click="addNewTask">Add</VButton>
         </div>
+
         <div v-for="Task in Tasks" :key=Task.id>
-            <ToDoTask @deleteTask="deleteTask(Task.id)" :task="Task">{{ Task.text }}</ToDoTask>
+            <ToDoTask @deleteTask="deleteTask(Task.id)" :task="Task"></ToDoTask>
         </div>
+
     </div>
 </template>
 <script>
@@ -22,11 +25,13 @@ export default {
             Tasks:[
                 {
                     id:1,
-                    text:'hello'
+                    text:'Breathe air',
+                    done:true
                 },
                 {
                     id:2,
-                    text:'hello'
+                    text:'Write todays tasks',
+                    done:false
                 }
             ],
             NewTask:''
@@ -37,7 +42,8 @@ export default {
             if(this.NewTask!=''){
                 this.Tasks.push({
                     id:Date.now(),
-                    text:this.NewTask
+                    text:this.NewTask,
+                    done:false
                 })
                 this.NewTask = ''
             }
@@ -48,7 +54,7 @@ export default {
     }
 } 
 </script>
-<style scoped>
+<style>
     h1{
         font-family: Arial, Helvetica, sans-serif;
         color: rgb(39, 39, 39)
@@ -61,6 +67,12 @@ export default {
         
     }
     input{
-        width: 70%;
+        border-radius: 20px;
+        border:  2px solid rgb(153, 153, 153);
+        padding-left: 10px;
+    }
+    .NewTaskDiv{
+        display: flex;
+        justify-content: space-between;
     }
 </style>
