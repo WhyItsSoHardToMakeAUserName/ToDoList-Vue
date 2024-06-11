@@ -2,7 +2,7 @@
     <div style="display: flex;align-items: center; gap: 10px;padding: 5px 0;">
         <input type="checkbox"  @click="toggleTagOnCheckbox">
 
-        <component :is="CurrentTag" ref="text"id="text" @click="setEditingState" @focusout="removeEditingState"><slot></slot></component>
+        <component :is="CurrentTag" ref="text"id="text" :value="task.text" @input="task.text = $event.target.value" @click="setEditingState" @focusout="removeEditingState"><slot></slot></component>
         
         <VButton @click="$emit('deleteTask')">delete</VButton>
     </div>
@@ -10,6 +10,9 @@
 <script>
 export default {
     emits:['deleteTask'],
+    props:{
+        task:Object
+    },
     data(){
         return{
             CurrentTag:'p',

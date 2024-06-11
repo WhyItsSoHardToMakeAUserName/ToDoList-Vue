@@ -7,7 +7,7 @@
 
         </div>
         <div v-for="Task in Tasks" :key=Task.id>
-            <ToDoTask @deleteTask="deleteTask(Task.id)">{{ Task.text }}</ToDoTask>
+            <ToDoTask @deleteTask="deleteTask(Task.id)" :task="Task">{{ Task.text }}</ToDoTask>
         </div>
     </div>
 </template>
